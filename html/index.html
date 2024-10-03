@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="ru" class="page">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Fonts -->
+  <link rel="preload" href="@@pathi/font/montserrat.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="@@pathi/font/montserrat.woff" as="font" type="font/woff" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="@@pathstyle/modules/animation.css">
 
   <title>Animation</title>
 </head>
+
 <body class="page__body">
   <h1>Пробные блоки</h1>
   <div class="main-wrapper">
@@ -28,7 +33,50 @@
         <img class="zero-g__fly-chair" src="@@pathi/media/stat/template/fly-chair.webp" width="1050" height="494" alt="Кресло режиме кресла Zero-G">
       </div>
     </section>
+    <section class="become">
+      <h2 class="visually-hidden">
+        Стать здоровым
+      </h2>
+      <div class="become__content-wrapper">
+        <!-- <h3>
+          БУДЬ СИЛЬНЫМ
+        </h3>
+        <h3>
+          БУДЬ ЖЕЛАННОЙ
+        </h3>
+        <p class="become__text">
+          Уникальные программы массажа
+          для мужской силы
+        </p>
+        <p class="become__text">
+          Ритмичный глубокий массаж с применением элементов тантра-терапии подарит мужскому телу особенное состояние обновления.
+        </p>
+        <p class="become__text">
+          Уникальные программы массажа для женского здоровья
+        </p>
+        <p class="become__text">
+          Точечное воздействие с применением
+          элементов инновационной техники
+          слим-массажа учитывает тонкости
+          женского организма, положительно
+          влияя на особо проблемные
+          зоны — живот, бёдра,
+          ягодицы и руки.
+        </p> -->
+        <div class="become__image become__image-left-block">
+          <picture>
+            <img src="@@pathi/media/stat/template/become-man.webp" width="282" height="857" alt="Фигура мужчины">
+          </picture>
+        </div>
+        <div class="become__image become__image-right-block">
+          <picture>
+            <img src="@@pathi/media/stat/template/become-woman.webp" width="207" height="789"  alt="Фигура женщины">
+          </picture>
+        </div>
+      </div>
+    </section>
   </div>
   <script src="@@pathjs/modules/animation.js"></script>
 </body>
+
 </html>
