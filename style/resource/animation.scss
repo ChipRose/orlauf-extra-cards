@@ -1,5 +1,6 @@
 @import "global/normalize.scss";
 @import "global/global.scss";
+@import "global/mixin.scss";
 @import "global/global-variables.scss";
 
 //FONTS
@@ -26,18 +27,6 @@
 
 //---GLOBAL---
 
-.page {
-  width: 100%;
-  height: 100%;
-}
-
-.page__body {
-  padding: 0;
-  margin: 0;
-  min-width: var(--);
-  height: 100%;
-}
-
 .main-wrapper {
   margin: 0 auto;
   max-width: var(--desktop-width);
@@ -50,6 +39,8 @@
 
 .container-box {
   margin: 0 auto;
+  padding: 0 10px;
+  box-sizing: border-box;
   max-width: var(--max-container-width);
 
   //   @media (max-width: 1240px) and (max-width: 1023px) {
@@ -81,6 +72,18 @@
 @keyframes levitate {
   100% {
     transform: translateY(-20px);
+  }
+}
+
+@keyframes move {
+  0%,
+  45% {
+    transform: translateX(calc(50vw - 20px));
+  }
+
+  55%,
+  100% {
+    transform: translateX(calc(-50vw + 20px));
   }
 }
 
@@ -132,11 +135,9 @@
 }
 
 .zero-g__title span {
+  @include text-gradient (var(--title-gradient));
+
   display: inline;
-  background: var(--title-gradient);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   position: relative;
   text-align: center;
 }
@@ -158,14 +159,11 @@
 }
 
 .zero-g__fly-girl {
+  animation: 4s ease-in-out infinite alternate levitate;
+
   width: max(350px, 83%);
   height: auto;
   transform: translateY(0);
-  animation-name: levitate;
-  animation-duration: 4s;
-  animation-iteration-count: infinite;
-  animation-timing-function: ease-in-out;
-  animation-direction: alternate;
 }
 
 .zero-g__fly-chair {
@@ -184,41 +182,79 @@
   position: relative;
 }
 
-.become__background-wrapper {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+.become__background {
+  padding-top: 30px;
   display: flex;
-  flex-direction: column;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.become__mobile-wrapper {
+
+  padding: 0 60px;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  z-index: -1;
+  width: calc(100vw);
+  box-sizing: border-box;
+  overflow: hidden;
+  outline: 1px solid red;
 }
 
 .become__content-wrapper {
+  animation: 10s ease-in-out 1s infinite alternate move;
+
+  flex: 0 0 calc(200vw - 60px);
   display: grid;
-  width: 100%;
   align-items: flex-end;
-  grid-template-rows: 40% 32% 28%;
-  grid-template-columns: 1fr 13% 16% 1fr;
+  grid-template-rows: 25% 1fr 33%;
+  grid-template-columns: 1fr 100px 100px 1fr;
   transition: .7s cubic-bezier(.45, 0, .55, 1);
+  gap: 10px;
+  // justify-content: start;
+
 }
 
 //title
-.become__title-left-full {
-  grid-row: 1/2;
-  grid-column: 1/2;
-}
 
-.become__title-right {
-  grid-row: 1/2;
-  grid-column: 4/5;
+.become__title {
+  padding: 0;
+  margin: 0;
+  @include text-gradient (var(--gold-gradient));
+  font-size: clamp(20px, 3vw, 67px);
+
+  &--left {
+    grid-row: 2/3;
+    grid-column: 1/2;
+  }
+
+  &--right {
+    grid-row: 1/2;
+    grid-column: 4/5;
+  }
 }
 
 //image
 
-.become__image {
+.become__image-block {
+
+  &--left {
+    // margin-left: 15px;
+    grid-row: 1/-1;
+    grid-column: 2/3;
+    height: 352px;
+
+  }
+
+  &--right {
+    margin-left: -20px;
+    grid-row: 1/-1;
+    grid-column: 3/4;
+    height: 331px;
+
+  }
+
   img {
     display: block;
     max-height: 100%;
@@ -226,13 +262,18 @@
   }
 }
 
-.become__image-left-block {
-  margin-right: -60px;
-  grid-row: 1/-1;
-  grid-column: 2/3;
-}
+//text
 
-.become__image-right-block {
-  grid-row: 1/4;
-  grid-column: 3/4;
+.become__text-mobile {
+  align-self: start;
+
+  &--right {
+    grid-row: 2/3;
+    grid-column: 4/5;
+  }
+
+  &--left {
+    grid-row: 3/4;
+    grid-column: 1/2;
+  }
 }
