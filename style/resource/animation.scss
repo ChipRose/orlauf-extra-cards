@@ -4,7 +4,7 @@
 @import "global/mixin.scss";
 
 //VARIABLES
-$SLIDE_INTERSECTION: 30px;
+$SLIDE_INTERSECTION: 50px;
 $BUFFER: 80px;
 $WAVE_HEIGHT: 20%;
 
@@ -87,7 +87,7 @@ $WAVE_HEIGHT: 20%;
 
   55%,
   100% {
-    transform: translateX(calc(-100vw + 2*$BUFFER));
+    transform: translateX(calc(-100vw + 2 * $BUFFER));
   }
 }
 
@@ -230,6 +230,32 @@ $WAVE_HEIGHT: 20%;
 .become__slides {
   display: flex;
   overflow: hidden;
+
+  .become__slide--left {
+    opacity: 1;
+    z-index: 10;
+  }
+
+  .become__content-wrapper {
+    transform: translateX(0);
+  }
+}
+
+.become__slides--active-right {
+  .become__slide--left {
+    opacity: 0.3;
+    z-index: 1;
+  }
+
+  .become__slide--right {
+    opacity: 1;
+    position: relative;
+    z-index: 10;
+  }
+
+  .become__content-wrapper {
+    transform: translateX(calc(-100vw + 2 * $BUFFER));
+  }
 }
 
 .become__content-wrapper {
@@ -241,7 +267,7 @@ $WAVE_HEIGHT: 20%;
     calc(100vw - 10px - $SLIDE_INTERSECTION/2 - $BUFFER) $SLIDE_INTERSECTION
     calc(100vw - 10px - $SLIDE_INTERSECTION/2 - $BUFFER);
   transition: 0.7s cubic-bezier(0.45, 0, 0.55, 1);
-  animation: 8s ease-in-out 500ms infinite alternate move;
+  // animation: 8s ease-in-out 500ms infinite alternate move;
 
   @media (min-width: $TABLET_WIDTH) {
     animation: none;
@@ -256,6 +282,8 @@ $WAVE_HEIGHT: 20%;
   width: 100%;
   display: flex;
   justify-content: space-between;
+  opacity: 0.4;
+  transition: all 1s ease-in;
 
   &--left {
     grid-column: 1/3;
@@ -273,7 +301,6 @@ $WAVE_HEIGHT: 20%;
 .become__info-block {
   padding: 30px 10px;
   box-sizing: border-box;
-  // max-width: 50%;
   display: flex;
   flex-direction: column;
   justify-content: end;
