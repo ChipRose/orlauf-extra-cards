@@ -1,3 +1,8 @@
+$DESKTOP_WIDTH: 1920px;
+$TABLET_WIDTH: 768px;
+$MOBILE_WIDTH: 320px;
+$CONTAINER_WIDTH: 1440px; 
+
 :root {
   --desktop-width: 1920px;
   --tablet-width: 768px;
@@ -7,7 +12,8 @@
   --cl-main-background: rgba(249, 190, 217, 1);
   --cl-contrast: rgba(255, 255, 255, 1);
   --cl-dark: rgba(0, 0, 0, 1);
-  --cl-star:rgba(95, 145, 255,1);
+  --cl-neutral-dark: rgba(15, 15, 15, 1);
+  --cl-star: rgba(95, 145, 255, 1);
 
   --cl-accent: rgba(193, 148, 228, 1);
 
@@ -22,5 +28,5 @@
   );
   --gold-gradient: linear-gradient(108.9deg, #d8da86 16.44%, #dc9e54 46.38%, #d8da86 76.32%);
   --sky-gradient: linear-gradient(125deg, #00103a 0%, #3e5f77 100%);
-  --star-gradient:linear-gradient(-45deg, rgba(0, 0, 255, 0), #5f91ff, rgba(0, 0, 255, 0)); 
+  --star-gradient: linear-gradient(-45deg, rgba(0, 0, 255, 0), #5f91ff, rgba(0, 0, 255, 0));
 }
