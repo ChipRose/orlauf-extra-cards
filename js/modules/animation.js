@@ -25,23 +25,25 @@ const Width = {
   MOBILE_WIDTH: 320,
   CONTAINER_WIDTH: 1440
 };
-const windowWidth = document.documentElement.clientWidth;
 
 //---BECOME---
 
-const sliderBecome = document.querySelector('.become__slides');
-const toggleClasses = () => {
-  sliderBecome.classList.toggle('become__slides--active-right');
+const animateSlider = document.querySelector('.animation-slides');
+const toggleClass = className => {
+  animateSlider.classList.toggle(className);
 };
-const setMobileAnimation = () => {
-  let animationTimeout = null;
+const setAnimation = () => {
+  const windowWidth = document.documentElement.clientWidth;
   if (windowWidth < Width.TABLET_WIDTH) {
-    animationTimeout = setInterval(toggleClasses, 3500);
+    !animateSlider.classList.contains('mobile') && animateSlider.classList.add('mobile');
   } else {
-    sliderBecome.classList.contains('become__slides--active-right') && sliderBecome.classList.remove('become__slides--active-right');
-    animationTimeout && clearInterval(animationTimeout);
+    animateSlider.classList.contains('mobile') && animateSlider.classList.remove('mobile');
   }
 };
-setMobileAnimation();
+setInterval(() => toggleClass('animation-slides--active-right'), 3500);
+setAnimation();
+window.addEventListener('resize', () => {
+  setAnimation();
+});
 /******/ })()
 ;
