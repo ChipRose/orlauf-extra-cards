@@ -25,6 +25,9 @@ const Width = {
   MOBILE_WIDTH: 320,
   CONTAINER_WIDTH: 1440
 };
+const getWindowWidth = () => {
+  return document.documentElement.clientWidth;
+};
 
 //---BECOME---
 
@@ -33,7 +36,7 @@ const toggleClass = className => {
   animateSlider.classList.toggle(className);
 };
 const setAnimation = () => {
-  const windowWidth = document.documentElement.clientWidth;
+  const windowWidth = getWindowWidth();
   if (windowWidth < Width.TABLET_WIDTH) {
     !animateSlider.classList.contains('mobile') && animateSlider.classList.add('mobile');
   } else {
@@ -42,9 +45,6 @@ const setAnimation = () => {
 };
 setInterval(() => toggleClass('animation-slides--active-right'), 3500);
 setAnimation();
-window.addEventListener('resize', () => {
-  setAnimation();
-});
 
 //---CURSOR---
 
@@ -53,23 +53,52 @@ const cursorArea = document.getElementById('cursorArea');
 const handleMouseMove = evt => {
   const x = evt.clientX;
   const y = evt.clientY;
+  const xLeft = evt.pageX;
+  const yTop = evt.pageY;
   const rect = cursorArea.getBoundingClientRect();
   const isInside = x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom;
   if (isInside) {
-    cursor.style.left = `${x - 40}px`;
-    cursor.style.top = `${y - rect.top - 10}px`;
+    cursor.style.left = `${xLeft - 45}px`;
+    cursor.style.top = `${yTop - 15}px`;
     cursor.style.display = 'block';
   } else {
     cursor.style.display = 'none';
   }
 };
-document.addEventListener('mousemove', handleMouseMove);
-cursorArea.addEventListener('mouseenter', () => {
+const handleMouseEnter = () => {
   document.body.style.cursor = 'none';
-});
-cursorArea.addEventListener('mouseleave', () => {
+};
+const handleMouseLeave = () => {
   document.body.style.cursor = 'default';
   cursor.style.display = 'none';
+};
+const addCustomCursor = () => {
+  document.addEventListener('mousemove', handleMouseMove);
+  cursorArea.addEventListener('mouseenter', handleMouseEnter);
+  cursorArea.addEventListener('mouseleave', handleMouseLeave);
+};
+const removeCustomCursor = () => {
+  cursor.style.display = 'none';
+  document.body.style.cursor = 'default';
+  document.removeEventListener('mousemove', handleMouseMove);
+  cursorArea.removeEventListener('mouseenter', handleMouseEnter);
+  cursorArea.removeEventListener('mouseleave', handleMouseLeave);
+};
+const setCustomCursor = () => {
+  const windowWidth = getWindowWidth();
+  if (windowWidth > Width.TABLET_WIDTH) {
+    addCustomCursor();
+  } else {
+    removeCustomCursor();
+  }
+};
+setCustomCursor();
+
+//-----------------
+
+window.addEventListener('resize', () => {
+  setAnimation();
+  setCustomCursor();
 });
 /******/ })()
 ;

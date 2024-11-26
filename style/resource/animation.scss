@@ -6,7 +6,7 @@
 //VARIABLES
 $SLIDE_INTERSECTION: 50px;
 $BUFFER: 80px;
-$WAVE_HEIGHT: 20%;
+$WAVE_HEIGHT: 30%;
 
 //FONTS
 
@@ -31,6 +31,10 @@ $WAVE_HEIGHT: 20%;
 }
 
 //---GLOBAL---
+
+.body {
+  position: relative;
+}
 
 .main-wrapper {
   margin: 0 auto;
@@ -212,6 +216,7 @@ $WAVE_HEIGHT: 20%;
 .become {
   padding-top: 30px;
   position: relative;
+  z-index: 0;
   color: var(--cl-contrast);
   background: var(--cl-neutral-dark);
 }
@@ -221,7 +226,7 @@ $WAVE_HEIGHT: 20%;
   width: 100%;
   height: 100%;
   top: 0;
-  z-index: 1;
+  z-index: -1;
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-size: cover;
@@ -423,7 +428,8 @@ $WAVE_HEIGHT: 20%;
 .control {
   padding-top: 30px;
   position: relative;
-  height: 100vh;
+  z-index: 0;
+  min-height: 500px;
   color: var(--cl-contrast);
   background: var(--cl-neutral-dark);
   overflow: hidden;
@@ -433,15 +439,18 @@ $WAVE_HEIGHT: 20%;
   width: 100%;
   height: 100%;
   position: absolute;
+  z-index: -1;
   top: 0;
   left: 0;
   background-repeat: no-repeat;
   background-position: 100% 0;
+  background-size: contain;
 }
 
 //cursor
 
 .custom-cursor {
+  display: none;
   position: absolute;
   width: 1323px;
   height: 1233px;
@@ -451,24 +460,25 @@ $WAVE_HEIGHT: 20%;
   transition: none;
 }
 
-
-
 //---WAVES---
 
 .waves {
-  padding: 30px 0 calc($WAVE_HEIGHT + 30px);
-  min-height: 300px;
+  padding: 30px 0 calc(80px);
+  min-height: 500px;
   background-color: var(--cl-dark);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   position: relative;
+  box-sizing: border-box;
 }
 
 .waves-container {
-  position: absolute;
-  bottom: 0;
-  left: 0;
   width: 100%;
   height: $WAVE_HEIGHT;
   overflow: hidden;
+  position: absolute;
+  bottom: 0;
 }
 
 .wave {
@@ -518,6 +528,7 @@ $WAVE_HEIGHT: 20%;
 .sky {
   padding: 30px 0 50px;
   min-height: 500px;
+  box-sizing: border-box;
   position: relative;
   background: var(--sky-gradient);
 }
@@ -628,5 +639,5 @@ $WAVE_HEIGHT: 20%;
 
 .sky__title {
   @include title(var(--title-gradient), var(--cl-accent));
-  font-size: clamp(26px, 8vw, 60px);
+  font-size: clamp(20px, 3vw, 67px);
 }
