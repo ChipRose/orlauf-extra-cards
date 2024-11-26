@@ -418,6 +418,41 @@ $WAVE_HEIGHT: 20%;
   }
 }
 
+//---CONTROL---
+
+.control {
+  padding-top: 30px;
+  position: relative;
+  height: 100vh;
+  color: var(--cl-contrast);
+  background: var(--cl-neutral-dark);
+  overflow: hidden;
+}
+
+.control__background {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-repeat: no-repeat;
+  background-position: 100% 0;
+}
+
+//cursor
+
+.custom-cursor {
+  position: absolute;
+  width: 1323px;
+  height: 1233px;
+  pointer-events: none;
+  background-size: cover;
+  z-index: 10;
+  transition: none;
+}
+
+
+
 //---WAVES---
 
 .waves {
