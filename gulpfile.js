@@ -11,6 +11,9 @@ import { stacksvg } from 'gulp-stacksvg';
 import browser from 'browser-sync';
 import fileinclude from 'gulp-file-include';
 
+const sass = gulpSass(dartSass);
+const isDevelopment = process.env.NODE_ENV !== 'production';
+
 const PROJECT_FOLDER = '.';
 const SRC_FOLDER = '.';
 const PUBLICATION_FOLDER = './build';
@@ -22,7 +25,7 @@ const path = {
     img: `${SRC_FOLDER}/i/media-resource/**/*.{jpg,png}`,
     sprite: `${SRC_FOLDER}/i/media-resource/stat/icons/**/*.svg`,
     assets: `${SRC_FOLDER}/i/media-resource/**/*`,
-    json: `${SRC_FOLDER}/json/**/*.json`
+    js: `${SRC_FOLDER}/js/common/**/*.js`,
   },
   build: {
     html: `${PROJECT_FOLDER}/`,
@@ -30,7 +33,7 @@ const path = {
     js: `${PROJECT_FOLDER}/js/modules/`,
     img: `${PROJECT_FOLDER}/i/media/`,
     sprite: `${PROJECT_FOLDER}/i/media/stat/`,
-    assets: `${PROJECT_FOLDER}/i/media`
+    assets: `${PROJECT_FOLDER}/i/media`,
   },
   publication: {
     html: `${PUBLICATION_FOLDER}/`,
@@ -38,118 +41,125 @@ const path = {
     js: `${PUBLICATION_FOLDER}/js/modules/`,
     img: `${PUBLICATION_FOLDER}/i/media/`,
     sprite: `${PUBLICATION_FOLDER}/i/media/stat/`,
-    assets: `${PUBLICATION_FOLDER}/i/media`
+    assets: `${PUBLICATION_FOLDER}/i/media`,
   },
   watch: {
     html: `${SRC_FOLDER}/html/**/*.html`,
     css: `${SRC_FOLDER}/style/resource/**/*.scss`,
     js: `${SRC_FOLDER}/js/common/**/*.js`,
-    json: `${SRC_FOLDER}/json/**/*.{json}`,
-    assets: `${SRC_FOLDER}/i/media-resource/**/*.{jpg,png}`
-  }
+    assets: `${SRC_FOLDER}/i/media-resource/**/*.{jpg,png}`,
+  },
 };
 
-const sass = gulpSass(dartSass);
-let isDevelopment = true;
+// Универсальная обработка HTML
+function processMarkup(isProduction = false) {
+  const destPath = isProduction ? path.publication.html : path.build.html;
+  const contextPath = isProduction ? '' : '/';
 
-export function processMarkup() {
-  return gulp.src(path.src.html)
-    .pipe(fileinclude({
-      prefix: '@@',
-
-      context: {
-        path: '/'
-      }
-    }))
-    .pipe(gulp.dest(path.build.html))
+  return gulp
+    .src(path.src.html)
+    .pipe(fileinclude({ prefix: '@@', context: { path: contextPath } }))
+    .pipe(gulp.dest(destPath))
     .pipe(browser.stream());
 }
 
-export function processStyles() {
-  return gulp.src(path.src.css, { sourcemaps: isDevelopment })
+// Универсальная обработка SCSS
+function processStyles(isProduction = false) {
+  const destPath = isProduction ? path.publication.css : path.build.css;
+  const contextPath = isProduction ? '../../' : '/';
+
+  return gulp
+    .src(path.src.css, { sourcemaps: !isProduction })
     .pipe(plumber())
-    .pipe(sass({
-    }).on('error', sass.logError))
-    .pipe(fileinclude({
-      prefix: '@@',
-
-      context: {
-        path: '/'
-      }
-    }))
-    .pipe(gulp.dest(path.build.css, { sourcemaps: isDevelopment }))
+    .pipe(sass().on('error', sass.logError))
+    .pipe(fileinclude({ prefix: '@@', context: { path: contextPath } }))
+    .pipe(gulp.dest(destPath, { sourcemaps: !isProduction }))
     .pipe(browser.stream());
 }
 
-export function processScript({ src, title, dest = path.build.js }) {
-  return function script() {
-    return gulp.src(src)
-      .pipe(webpack({
-        mode: 'none',
-        module: {
-          rules: [
-            { test: /\.js$/i, exclude: '/node_modules/', use: ['babel-loader'] },
-          ],
-        },
-      }))
+// Универсальная обработка JS
+function processScript({ src, title, dest, isProduction = false }) {
+  return () =>
+    gulp
+      .src(src)
+      .pipe(
+        webpack({
+          mode: isProduction ? 'production' : 'development',
+          module: {
+            rules: [
+              { test: /\.js$/i, exclude: /node_modules/, use: ['babel-loader'] },
+              { test: /\.css$/i, use: ['style-loader', 'css-loader'] },
+              { test: /\.scss$/i, use: ['style-loader', 'css-loader', 'sass-loader'] },
+            ],
+          },
+        })
+      )
       .pipe(rename(title))
-      .pipe(fileinclude({
-        prefix: '@@',
-
-        context: {
-          path: '/'
-        }
-      }))
       .pipe(gulp.dest(dest))
       .pipe(browser.stream());
-  };
 }
 
-export function processAllScripts() {
+function processAllScripts(isProduction = false) {
   const jsPaths = [
-    { title: 'animation.js' },
+    { title: 'animation.js', src: './js/common/animation.js' },
+    // Добавляйте другие файлы по необходимости
   ];
 
-  return gulp.series(
-    jsPaths.map(({ title }) => (
-      processScriptPub({ src: `./js/common/${title}`, title })
-    ))
+  return gulp.parallel(
+    jsPaths.map(({ src, title }) =>
+      processScript({
+        src,
+        title,
+        dest: isProduction ? path.publication.js : path.build.js,
+        isProduction,
+      })
+    )
   );
 }
 
-export function optimizeImages() {
-  return gulp.src('./i/media-resource/**/*.{png,jpg}')
-    .pipe(gulp.dest('./i/media/'));
+// Оптимизация изображений
+function optimizeImages() {
+  return gulp.src(path.src.img).pipe(gulp.dest(path.build.img));
 }
 
-export function createWebp() {
-  return gulp.src(path.src.img)
-    .pipe(webp())
-    .pipe(gulp.dest(path.build.img));
+// Создание WebP
+function createWebp(isProduction = false) {
+  const destPath = isProduction ? path.publication.img : path.build.img;
+
+  return gulp.src(path.src.img).pipe(webp()).pipe(gulp.dest(destPath));
 }
 
-export function createStack() {
-  return gulp.src(path.src.sprite)
+// Создание SVG-спрайта
+function createStack(isProduction = false) {
+  const destPath = isProduction ? path.publication.sprite : path.build.sprite;
+
+  return gulp
+    .src(path.src.sprite)
     .pipe(svgo())
     .pipe(stacksvg())
     .pipe(rename('sprite.svg'))
-    .pipe(gulp.dest(path.build.sprite));
+    .pipe(gulp.dest(destPath));
 }
 
+// Копирование ассетов
+function copyAssets(isProduction = false) {
+  const destPath = isProduction ? path.publication.assets : path.build.assets;
 
-export function copyAssets() {
-  return gulp.src(path.src.assets, { base: 'i/media-resource' })
-    .pipe(gulp.dest(path.build.assets));
+  return gulp.src(path.src.assets, { base: 'i/media-resource' }).pipe(gulp.dest(destPath));
 }
 
-function deleteFolders() {
-  return deleteAsync(['./*.html', path.build.assets, path.build.js, path.build.css]);
+// Удаление файлов
+function deleteFolders(isProduction = false) {
+  const destPath = isProduction ? PUBLICATION_FOLDER : ['./*.html', path.build.assets, path.build.js, path.build.css];
+
+  return deleteAsync(destPath);
 }
 
-export function startServer(done) {
+// Запуск сервера
+function startServer(done) {
   browser.init({
     server: {
-      baseDir: './'
+      baseDir: './',
     },
     cors: true,
     notify: false,
@@ -158,162 +168,37 @@ export function startServer(done) {
   done();
 }
 
-function reloadServer(done) {
-  browser.reload();
-  done();
-}
-
+// Слежение за файлами
 function watchFiles() {
-  gulp.watch(path.watch.css, gulp.series(processStyles));
-  gulp.watch(path.watch.assets, gulp.series(copyAssets, createWebp));
-  gulp.watch(path.watch.json, gulp.series(reloadServer));
-  gulp.watch(path.watch.js, gulp.series(processAllScripts()));
-  gulp.watch(path.watch.html, gulp.series(processMarkup, reloadServer));
+  gulp.watch(path.watch.css, gulp.series(() => processStyles(false)));
+  gulp.watch(path.watch.assets, gulp.series(() => copyAssets(false), () => createWebp(false)));
+  gulp.watch(path.watch.js, processAllScripts(false));
+  gulp.watch(path.watch.html, gulp.series(() => processMarkup(false), browser.reload));
 }
 
-function compileProject(done) {
-  gulp.parallel(
-    processMarkup,
-    processStyles,
-    processAllScripts(),
-    copyAssets,
-    createStack,
-    createWebp
-  )(done);
-}
-
-export function buildProd(done) {
-  isDevelopment = false;
-  gulp.series(
-    deleteFolders,
-    compileProject,
-    optimizeImages
-  )(done);
-}
-
-export function runDev(done) {
-  gulp.series(
-    deleteFolders,
-    compileProject,
-    startServer,
-    watchFiles
-  )(done);
-}
-
-//Publication
-
-function deleteFoldersPub() {
-  return deleteAsync([PUBLICATION_FOLDER]);
-}
-
-export function processMarkupPub() {
-  return gulp.src(path.src.html)
-    .pipe(fileinclude({
-      context: {
-        path: ''
-      }
-    }))
-    .pipe(gulp.dest(path.publication.html))
-    .pipe(browser.stream());
-}
-
-export function processStylesPub() {
-  return gulp.src(path.src.css, { sourcemaps: isDevelopment })
-    .pipe(plumber())
-    .pipe(sass({
-    }).on('error', sass.logError))
-    .pipe(fileinclude({
-      prefix: '@@',
-
-      context: {
-        path: '../../'
-      }
-    }))
-    .pipe(gulp.dest(path.publication.css, { sourcemaps: isDevelopment }));
-}
-
-export function processScriptPub({ src, title, dest = path.build.js }) {
-  return function script() {
-    return gulp.src(src)
-      .pipe(webpack({
-        mode: 'none',
-        module: {
-          rules: [
-            { test: /\.js$/i, exclude: '/node_modules/', use: ['babel-loader'] },
-          ],
-        },
-      }))
-      .pipe(rename(title))
-      .pipe(fileinclude({
-        prefix: '@@',
-
-        context: {
-          path: './'
-        }
-      }))
-      .pipe(gulp.dest(dest))
-      .pipe(browser.stream());
-  };
-}
-
-export function processAllScriptsPub() {
-  const dest = './build/js/modules/';
-  const jsPaths = [
-    { title: 'animation.js' },
-  ];
-
-  return gulp.series(
-    jsPaths.map(({ title }) => (
-      processScriptPub({ src: `./js/common/${title}`, title, dest })
-    ))
+// Компиляция проекта
+function compileProject(isProduction = false) {
+  return gulp.parallel(
+    () => processMarkup(isProduction),
+    () => processStyles(isProduction),
+    processAllScripts(isProduction),
+    () => copyAssets(isProduction),
+    () => createStack(isProduction),
+    () => createWebp(isProduction)
   );
 }
 
-export function copyAssetsPub() {
-  return gulp.src([
-    './i/media-resource/**/*'
-  ], { base: 'i/media-resource' })
-    .pipe(gulp.dest('./build/i/media'));
-}
+// Задачи для разработки
+export const runDev = gulp.series(
+  async () => deleteFolders(false),
+  compileProject(false),
+  startServer,
+  watchFiles
+);
 
-export function copyFontsPub() {
-  return gulp.src([
-    './i/font/**/*',
-  ], { base: 'i/font' })
-    .pipe(gulp.dest('./build/i/font'));
-}
-
-export function createStackPub() {
-  return gulp.src(path.src.sprite)
-    .pipe(svgo())
-    .pipe(stacksvg())
-    .pipe(rename('sprite.svg'))
-    .pipe(gulp.dest(path.publication.sprite));
-}
-
-export function createWebpPub() {
-  return gulp.src(path.src.img)
-    .pipe(webp())
-    .pipe(gulp.dest(path.publication.img));
-}
-
-function compileProjectPub(done) {
-  gulp.parallel(
-    processMarkupPub,
-    processStylesPub,
-    processAllScriptsPub(),
-    copyAssetsPub,
-    copyFontsPub,
-    createStackPub,
-    createWebpPub
-  )(done);
-}
-
-export function PubProd(done) {
-  isDevelopment = false;
-
-  gulp.series(
-    deleteFoldersPub,
-    compileProjectPub
-  )(done);
-}
+// Задачи для продакшена
+export const buildProd = gulp.series(
+  async () => deleteFolders(true),
+  compileProject(true),
+  optimizeImages
+);

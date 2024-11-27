@@ -1,4 +1,4 @@
-// import "https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css";
+import 'tiny-slider/dist/tiny-slider.css';
 import { tns } from 'tiny-slider';
 
 console.log('JS in work');

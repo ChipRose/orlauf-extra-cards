@@ -5,9 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Fonts -->
-  <link rel="preload" href="@@pathi/font/montserrat-regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-  <link rel="preload" href="@@pathi/font/montserrat-regular.woff" as="font" type="font/woff" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="@@pathstyle/modules/animation.css">
+  <link rel="preload" href="/i/font/montserrat-regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/i/font/montserrat-regular.woff" as="font" type="font/woff" crossorigin="anonymous">
+
+  <link rel="stylesheet" type="text/css" href="/style/modules/animation.css">
 
   <title>Animation</title>
 </head>
@@ -17,7 +18,7 @@
   <div class="main-wrapper">
 
     <section class="zero-g">
-      <div class="zero-g__background" style="background-image: url('@@pathi/media/stat/template/x-space-background.webp');">
+      <div class="zero-g__background" style="background-image: url('/i/media/stat/template/x-space-background.webp');">
         <div class="zero-g__title-block container-box">
           <h2 class="zero-g__title" data-title="Режим левитации">
             <span>
@@ -26,8 +27,8 @@
           </h2>
         </div>
         <div class="zero-g__image-block container-box">
-          <img class="zero-g__fly-girl" src="@@pathi/media/stat/template/fly-girl.webp" width="1022" height="327" alt="Девушка обретает легкость в режиме кресла Zero-G">
-          <img class="zero-g__fly-chair" src="@@pathi/media/stat/template/fly-chair.webp" width="1050" height="494" alt="Кресло режиме кресла Zero-G">
+          <img class="zero-g__fly-girl" src="/i/media/stat/template/fly-girl.webp" width="1022" height="327" alt="Девушка обретает легкость в режиме кресла Zero-G">
+          <img class="zero-g__fly-chair" src="/i/media/stat/template/fly-chair.webp" width="1050" height="494" alt="Кресло режиме кресла Zero-G">
         </div>
       </div>
     </section>
@@ -40,34 +41,34 @@
         <div class="become__content-wrapper animation-slides__content-wrapper ">
           <div class="become__slide become__slide--left animation-slides__slide--left">
             <div class="become__info-block become__info-block--left">
-              <h3 class="become__title become__title--left">
+              <h3 class="become__title become__title--left title">
                 БУДЬ СИЛЬНЫМ
               </h3>
               <div class="become__text-block become__text-block--left">
-                <p class="">
+                <p class="text">
                   Уникальные программы массажа для мужской силы
                 </p>
-                <p class="become__text become__text--desktop animation-slides--show-on-active-desktop">
+                <p class="become__text become__text--desktop animation-slides--show-on-active-desktop text">
                   Ритмичный глубокий массаж с применением элементов тантра-терапии подарит мужскому телу особенное состояние обновления.
                 </p>
               </div>
             </div>
             <div class="become__image-block become__image-block--left">
               <picture>
-                <img src="@@pathi/media/stat/template/become-man.webp" width="116" height="354" alt="Фигура мужчины">
+                <img src="/i/media/stat/template/become-man.webp" width="116" height="354" alt="Фигура мужчины">
               </picture>
             </div>
           </div>
           <div class="become__slide become__slide--right animation-slides__slide--right">
             <div class="become__info-block become__info-block--right">
-              <h3 class="become__title become__title--right">
+              <h3 class="become__title become__title--right title">
                 БУДЬ ЖЕЛАННОЙ
               </h3>
               <div class="become__text-block become__text-block--right">
-                <p class="">
+                <p class="text">
                   Уникальные программы массажа для женского здоровья
                 </p>
-                <p class="become__text become__text--desktop animation-slides--show-on-active-desktop">
+                <p class="become__text become__text--desktop animation-slides--show-on-active-desktop text">
                   Точечное воздействие с применением элементов инновационной техники
                   слим-массажа учитывает тонкости женского организма, положительно
                   влияя на особо проблемные зоны — живот, бёдра, ягодицы и руки.
@@ -76,42 +77,63 @@
             </div>
             <div class="become__image-block become__image-block--right">
               <picture>
-                <img src="@@pathi/media/stat/template/become-woman.webp" width="87" height="333" alt="Фигура женщины">
+                <img src="/i/media/stat/template/become-woman.webp" width="87" height="333" alt="Фигура женщины">
               </picture>
             </div>
           </div>
         </div>
       </div>
-      <div class="become__background" style="background-image: url('@@pathi/media/stat/template/become-background.webp');">
+      <div class="become__background" style="background-image: url('/i/media/stat/template/become-background.webp');">
       </div>
     </section>
 
-    <section class="control"  id="cursorArea">
+    <section class="control" id="cursorArea">
       <div class="container-box">
-        <h2 class="control__title">
-          Пульт управления
-        </h2>
         <div class="control__content-wrapper">
-          <div class="control__text-block">
-            <p>
-              Получить доступ к расширенному функционалу поможет предусмотренный в конструкции массажного кресла стильный 8-дюймовый сенсорный пульт управления с новым графическим интерфейсом.
-            </p>
+          <div class="control__info-block">
+            <h2 class="control__title title">
+              Пульт управления
+            </h2>
+            <div class="control__text-block">
+              <p class="text">
+                Получить доступ к расширенному функционалу поможет предусмотренный в конструкции массажного кресла стильный 8-дюймовый сенсорный пульт управления с новым графическим интерфейсом.
+              </p>
+            </div>
           </div>
           <div class="control__slider-block">
+            <div class="control__slider-wrapper">
+              <div class="control__slider" id="controlSlider">
+                <div class="control__slide">
+                  <picture>
+                    <img src="/i/media/stat/template/slider/sens1.webp" alt="Слайд 1">
+                  </picture>
+                </div>
+                <div class="control__slide">
+                  <picture>
+                    <img src="/i/media/stat/template/slider/sens2.webp" alt="Слайд 2">
+                  </picture>
+                </div>
+                <div class="control__slide">
+                  <picture>
+                    <img src="/i/media/stat/template/slider/sens3.webp" alt="Слайд 3">
+                  </picture>
+                </div>
+              </div>
+            </div>
             <div class="control__image-block control__image-block--hold">
               <picture>
-                <img src="@@pathi/media/stat/template/hold-hand.webp" width="313" height="287" alt="Рука держит планшет">
+                <img src="/i/media/stat/template/hold-hand.webp" width="313" height="287" alt="Рука держит планшет">
               </picture>
             </div>
             <div class="control__image-block control__image-block--tablet">
               <picture>
-                <img src="@@pathi/media/stat/template/pult-screen.webp" width="313" height="287" alt="Рука держит планшет">
+                <img src="/i/media/stat/template/pult-screen.webp" width="313" height="287" alt="Рука держит планшет">
               </picture>
             </div>
           </div>
         </div>
       </div>
-      <div class="control__background" style="background-image: url('@@pathi/media/stat/template/pult-background.webp');"></div>
+      <div class="control__background" style="background-image: url('/i/media/stat/template/pult-background.webp');"></div>
     </section>
 
     <section class="waves">
@@ -121,9 +143,9 @@
         </h2>
       </div>
       <div class="waves-container">
-        <div class="wave wave1" style="background-image: url('@@pathi/media/stat/template/wave.png');"></div>
-        <div class="wave wave2" style="background-image: url('@@pathi/media/stat/template/wave.png');"></div>
-        <div class="wave wave3" style="background-image: url('@@pathi/media/stat/template/wave.png');"></div>
+        <div class="wave wave1" style="background-image: url('/i/media/stat/template/wave.png');"></div>
+        <div class="wave wave2" style="background-image: url('/i/media/stat/template/wave.png');"></div>
+        <div class="wave wave3" style="background-image: url('/i/media/stat/template/wave.png');"></div>
       </div>
     </section>
 
@@ -145,10 +167,10 @@
       </div>
     </section>
 
-    <div class="custom-cursor" style="background-image: url('@@pathi/media/stat/template/pult-hand.webp')" id="cursor"></div>
+    <div class="custom-cursor" style="background-image: url('/i/media/stat/template/pult-hand.webp')" id="cursor"></div>
 
   </div>
-  <script src="@@pathjs/modules/animation.js"></script>
+  <script src="/js/modules/animation.js"></script>
 </body>
 
 </html>
