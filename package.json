@@ -59,5 +59,8 @@
     "stylelint-config-htmlacademy": "^4.0.5",
     "webpack": "^5.89.0",
     "webpack-stream": "^7.0.0"
+  },
+  "dependencies": {
+    "tiny-slider": "^2.9.4"
   }
 }

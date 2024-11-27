@@ -1,9 +1,12 @@
 $DESKTOP_WIDTH: 1920px;
 $TABLET_WIDTH: 768px;
 $MOBILE_WIDTH: 320px;
-$CONTAINER_WIDTH: 1440px; 
+$CONTAINER_WIDTH: 1440px;
 
 :root {
+  --indent-main: 24px;
+  --indent-s: 16px;
+  
   --cl-main-background: rgba(249, 190, 217, 1);
   --cl-contrast: rgba(255, 255, 255, 1);
   --cl-dark: rgba(0, 0, 0, 1);

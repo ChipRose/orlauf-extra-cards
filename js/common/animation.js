@@ -1,3 +1,6 @@
+// import "https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css";
+import { tns } from 'tiny-slider';
+
 console.log('JS in work');
 
 const Width = {
@@ -102,5 +105,17 @@ setCustomCursor();
 window.addEventListener('resize', () => {
   setAnimation();
   setCustomCursor();
+});
+
+//SLIDER
+
+const controlSlider = tns({
+  container: '#controlSlider',
+  items: 1,
+  controls: false,
+  nav:false,
+  mouseDrag: true,
+  // autoWidth:true,
+  viewportMax:100
 });
 

@@ -7,6 +7,8 @@
   <!-- Fonts -->
   <link rel="preload" href="/i/font/montserrat-regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
   <link rel="preload" href="/i/font/montserrat-regular.woff" as="font" type="font/woff" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
   <link rel="stylesheet" type="text/css" href="/style/modules/animation.css">
 
   <title>Animation</title>
@@ -86,11 +88,51 @@
       </div>
     </section>
 
-    <section class="control"  id="cursorArea">
+    <section class="control" id="cursorArea">
       <div class="container-box">
-        <h2 class="control__title">
-          Пульт управления
-        </h2>
+        <div class="control__content-wrapper">
+          <div class="control__info-block">
+            <h2 class="control__title title">
+              Пульт управления
+            </h2>
+            <div class="control__text-block">
+              <p class="text">
+                Получить доступ к расширенному функционалу поможет предусмотренный в конструкции массажного кресла стильный 8-дюймовый сенсорный пульт управления с новым графическим интерфейсом.
+              </p>
+            </div>
+          </div>
+          <div class="control__slider-block">
+            <div class="control__slider-wrapper">
+              <div class="control__slider" id="controlSlider">
+                <div class="control__slide">
+                  <picture>
+                    <img src="/i/media/stat/template/slider/sens1.webp" alt="Слайд 1">
+                  </picture>
+                </div>
+                <div class="control__slide">
+                  <picture>
+                    <img src="/i/media/stat/template/slider/sens2.webp" alt="Слайд 2">
+                  </picture>
+                </div>
+                <div class="control__slide">
+                  <picture>
+                    <img src="/i/media/stat/template/slider/sens3.webp" alt="Слайд 3">
+                  </picture>
+                </div>
+              </div>
+            </div>
+            <div class="control__image-block control__image-block--hold">
+              <picture>
+                <img src="/i/media/stat/template/hold-hand.webp" width="313" height="287" alt="Рука держит планшет">
+              </picture>
+            </div>
+            <div class="control__image-block control__image-block--tablet">
+              <picture>
+                <img src="/i/media/stat/template/pult-screen.webp" width="313" height="287" alt="Рука держит планшет">
+              </picture>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="control__background" style="background-image: url('/i/media/stat/template/pult-background.webp');"></div>
     </section>
@@ -125,6 +167,7 @@
         </div>
       </div>
     </section>
+
     <div class="custom-cursor" style="background-image: url('/i/media/stat/template/pult-hand.webp')" id="cursor"></div>
 
   </div>

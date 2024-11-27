@@ -32,6 +32,8 @@ $WAVE_HEIGHT: 30%;
 
 //---GLOBAL---
 
+//-element-
+
 .body {
   position: relative;
 }
@@ -61,7 +63,32 @@ $WAVE_HEIGHT: 30%;
   //   }
 }
 
-//animation
+.text {
+  padding: 0;
+  margin: 0 0 var(--indent-s);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.title {
+  padding: 0;
+  margin: 0;
+}
+
+.custom-cursor {
+  display: none;
+  position: absolute;
+  width: 1323px;
+  height: 1233px;
+  pointer-events: none;
+  background-size: cover;
+  z-index: 10;
+  transition: none;
+}
+
+//-animation-
 
 @keyframes color {
   0% {
@@ -329,12 +356,12 @@ $WAVE_HEIGHT: 30%;
 //info
 
 .become__info-block {
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: end;
   z-index: 1;
-  max-width: 50%;
+  box-sizing: border-box;
+  flex: 0 0 50%;
 
   &--left {
     padding: 30px 20px 30px 0;
@@ -443,21 +470,78 @@ $WAVE_HEIGHT: 30%;
   top: 0;
   left: 0;
   background-repeat: no-repeat;
-  background-position: 100% 0;
-  background-size: contain;
+  background-position: 50% 0;
 }
 
-//cursor
+.control__content-wrapper {
+  @media (min-width: $TABLET_WIDTH) {
+    display: flex;
+    justify-content: space-between;
+  }
+}
 
-.custom-cursor {
-  display: none;
+//slider
+
+.control__slider-block {
+  position: relative;
+  flex: 0 1 709px;
+}
+
+.control__slider-wrapper {
   position: absolute;
-  width: 1323px;
-  height: 1233px;
-  pointer-events: none;
-  background-size: cover;
-  z-index: 10;
-  transition: none;
+  width: 80%;
+  height: 53%;
+  left: 16%;
+  top: 5%;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.control__slider {
+  width: 100%;
+
+  img {
+    width: 100%;
+  }
+}
+
+//image
+
+.control__image-block {
+  width: 100%;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  &--hold {
+    position: absolute;
+    pointer-events: none;
+  }
+}
+
+//title
+
+.control__title {
+  @include text-gradient(var(--gold-gradient));
+
+  padding: 0;
+  margin: 0 0 30px;
+  text-transform: uppercase;
+  font-size: clamp(20px, 3vw, 67px);
+}
+
+//info
+
+.control__info-block {
+  margin-bottom: var(--indent-main);
+
+  @media (min-width: $TABLET_WIDTH) {
+    margin-bottom: 0;
+    flex: 0 0 30%;
+  }
 }
 
 //---WAVES---
