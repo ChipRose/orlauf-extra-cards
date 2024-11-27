@@ -5,8 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Fonts -->
-  <link rel="preload" href="/i/font/montserrat-regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-  <link rel="preload" href="/i/font/montserrat-regular.woff" as="font" type="font/woff" crossorigin="anonymous">
+  <link rel="preload" href="@@pathi/font/montserrat-regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="@@pathi/font/montserrat-regular.woff" as="font" type="font/woff" crossorigin="anonymous">
 
   <link rel="stylesheet" type="text/css" href="/style/modules/animation.css">
 
@@ -14,11 +14,15 @@
 </head>
 
 <body class="body">
-  <h1 class="visually-hidden">Блоки карточки</h1>
+
+  <h1 class="visually-hidden">
+    Блоки карточки
+  </h1>
+
   <div class="main-wrapper">
 
     <section class="zero-g">
-      <div class="zero-g__background" style="background-image: url('/i/media/stat/template/x-space-background.webp');">
+      <div class="zero-g__background" style="background-image: url('@@pathi/media/stat/template/x-space-background.webp');">
         <div class="zero-g__title-block container-box">
           <h2 class="zero-g__title" data-title="Режим левитации">
             <span>
@@ -27,8 +31,8 @@
           </h2>
         </div>
         <div class="zero-g__image-block container-box">
-          <img class="zero-g__fly-girl" src="/i/media/stat/template/fly-girl.webp" width="1022" height="327" alt="Девушка обретает легкость в режиме кресла Zero-G">
-          <img class="zero-g__fly-chair" src="/i/media/stat/template/fly-chair.webp" width="1050" height="494" alt="Кресло режиме кресла Zero-G">
+          <img class="zero-g__fly-girl" src="@@pathi/media/stat/template/fly-girl.webp" width="1022" height="327" alt="Девушка обретает легкость в режиме кресла Zero-G">
+          <img class="zero-g__fly-chair" src="@@pathi/media/stat/template/fly-chair.webp" width="1050" height="494" alt="Кресло режиме кресла Zero-G">
         </div>
       </div>
     </section>
@@ -55,7 +59,7 @@
             </div>
             <div class="become__image-block become__image-block--left">
               <picture>
-                <img src="/i/media/stat/template/become-man.webp" width="116" height="354" alt="Фигура мужчины">
+                <img src="@@pathi/media/stat/template/become-man.webp" width="116" height="354" alt="Фигура мужчины">
               </picture>
             </div>
           </div>
@@ -77,13 +81,31 @@
             </div>
             <div class="become__image-block become__image-block--right">
               <picture>
-                <img src="/i/media/stat/template/become-woman.webp" width="87" height="333" alt="Фигура женщины">
+                <img src="@@pathi/media/stat/template/become-woman.webp" width="87" height="333" alt="Фигура женщины">
               </picture>
             </div>
           </div>
         </div>
       </div>
-      <div class="become__background" style="background-image: url('/i/media/stat/template/become-background.webp');">
+      <div class="become__background" style="background-image: url('@@pathi/media/stat/template/become-background.webp');">
+      </div>
+    </section>
+
+    <section class="clouds">
+      <div class="clouds__info">
+        <h2 class="title">
+        </h2>
+      </div>
+      <div class="clouds__background">
+        <div class="clouds__background-wrapper">
+          <picture>
+            <img class="clouds__image  clouds__image--first" src="@@pathi/media/stat/template/sky-background.webp" alt="">
+          </picture>
+          <picture>
+            <img class="clouds__image  clouds__image--second" src="@@pathi/media/stat/template/sky-background.webp" alt="">
+          </picture>
+
+        </div>
       </div>
     </section>
 
@@ -105,35 +127,35 @@
               <div class="control__slider" id="controlSlider">
                 <div class="control__slide">
                   <picture>
-                    <img src="/i/media/stat/template/slider/sens1.webp" alt="Слайд 1">
+                    <img src="@@pathi/media/stat/template/slider/sens1.webp" alt="Слайд 1">
                   </picture>
                 </div>
                 <div class="control__slide">
                   <picture>
-                    <img src="/i/media/stat/template/slider/sens2.webp" alt="Слайд 2">
+                    <img src="@@pathi/media/stat/template/slider/sens2.webp" alt="Слайд 2">
                   </picture>
                 </div>
                 <div class="control__slide">
                   <picture>
-                    <img src="/i/media/stat/template/slider/sens3.webp" alt="Слайд 3">
+                    <img src="@@pathi/media/stat/template/slider/sens3.webp" alt="Слайд 3">
                   </picture>
                 </div>
               </div>
             </div>
             <div class="control__image-block control__image-block--hold">
               <picture>
-                <img src="/i/media/stat/template/hold-hand.webp" width="313" height="287" alt="Рука держит планшет">
+                <img src="@@pathi/media/stat/template/hold-hand.webp" width="313" height="287" alt="Рука держит планшет">
               </picture>
             </div>
             <div class="control__image-block control__image-block--tablet">
               <picture>
-                <img src="/i/media/stat/template/pult-screen.webp" width="313" height="287" alt="Рука держит планшет">
+                <img src="@@pathi/media/stat/template/pult-screen.webp" width="313" height="287" alt="Рука держит планшет">
               </picture>
             </div>
           </div>
         </div>
       </div>
-      <div class="control__background" style="background-image: url('/i/media/stat/template/pult-background.webp');"></div>
+      <div class="control__background" style="background-image: url('@@pathi/media/stat/template/pult-background.webp');"></div>
     </section>
 
     <section class="waves">
@@ -143,9 +165,9 @@
         </h2>
       </div>
       <div class="waves-container">
-        <div class="wave wave1" style="background-image: url('/i/media/stat/template/wave.png');"></div>
-        <div class="wave wave2" style="background-image: url('/i/media/stat/template/wave.png');"></div>
-        <div class="wave wave3" style="background-image: url('/i/media/stat/template/wave.png');"></div>
+        <div class="wave wave1" style="background-image: url('@@pathi/media/stat/template/wave.png');"></div>
+        <div class="wave wave2" style="background-image: url('@@pathi/media/stat/template/wave.png');"></div>
+        <div class="wave wave3" style="background-image: url('@@pathi/media/stat/template/wave.png');"></div>
       </div>
     </section>
 
@@ -167,10 +189,12 @@
       </div>
     </section>
 
-    <div class="custom-cursor" style="background-image: url('/i/media/stat/template/pult-hand.webp')" id="cursor"></div>
+    <div class="custom-cursor" style="background-image: url('@@pathi/media/stat/template/pult-hand.webp')" id="cursor"></div>
 
   </div>
+
   <script src="/js/modules/animation.js"></script>
+
 </body>
 
 </html>

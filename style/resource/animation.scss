@@ -36,6 +36,8 @@ $WAVE_HEIGHT: 30%;
 
 .body {
   position: relative;
+  min-width: $MOBILE_WIDTH;
+
 }
 
 .main-wrapper {
@@ -174,6 +176,28 @@ $WAVE_HEIGHT: 30%;
   }
   100% {
     width: 0;
+  }
+}
+
+@keyframes skywalker {
+  0% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  25% {
+    transform: translateX(-5%);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateX(-10%);
+  }
+  75% {
+    transform: translateX(-15%);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateX(-20%);
+    opacity: 0;
   }
 }
 
@@ -519,7 +543,7 @@ $WAVE_HEIGHT: 30%;
   }
 }
 
-//title
+//info
 
 .control__title {
   @include text-gradient(var(--gold-gradient));
@@ -530,8 +554,6 @@ $WAVE_HEIGHT: 30%;
   font-size: clamp(20px, 3vw, 67px);
 }
 
-//info
-
 .control__info-block {
   margin-bottom: var(--indent-main);
 
@@ -540,6 +562,48 @@ $WAVE_HEIGHT: 30%;
     flex: 0 0 30%;
   }
 }
+
+//---CLOUDS---
+
+.clouds {
+  position: relative;
+  min-height: 500px;
+  overflow: hidden;
+}
+
+.clouds__background {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+}
+
+.clouds__background-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-color: #387dcd;
+}
+
+.clouds__image {
+  position: absolute;
+  top: -50%;
+  left: 0;
+
+  &--first{
+    animation: skywalker 15s linear infinite;
+    animation-delay: 10s;
+    opacity: 0;
+  }
+
+  &--second{
+    animation: skywalker 15s linear infinite;
+  }
+}
+
+
 
 //---WAVES---
 

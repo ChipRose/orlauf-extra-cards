@@ -173,7 +173,7 @@ function watchFiles() {
   gulp.watch(path.watch.css, gulp.series(() => processStyles(false)));
   gulp.watch(path.watch.assets, gulp.series(() => copyAssets(false), () => createWebp(false)));
   gulp.watch(path.watch.js, processAllScripts(false));
-  gulp.watch(path.watch.html, gulp.series(() => processMarkup(false), browser.reload));
+  gulp.watch(path.watch.html, gulp.series(() => processMarkup(false)));
 }
 
 // Компиляция проекта
