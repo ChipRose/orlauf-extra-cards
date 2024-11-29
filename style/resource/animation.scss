@@ -37,7 +37,6 @@ $WAVE_HEIGHT: 30%;
 .body {
   position: relative;
   min-width: $MOBILE_WIDTH;
-
 }
 
 .main-wrapper {
@@ -198,6 +197,16 @@ $WAVE_HEIGHT: 30%;
   100% {
     transform: translateX(-20%);
     opacity: 0;
+  }
+}
+
+@keyframes cubeRotate {
+  from {
+    transform: rotateX(-20deg) rotateY(0deg);
+  }
+
+  to {
+    transform: rotateX(-20deg) rotateY(360deg);
   }
 }
 
@@ -592,18 +601,16 @@ $WAVE_HEIGHT: 30%;
   top: -50%;
   left: 0;
 
-  &--first{
+  &--first {
     animation: skywalker 15s linear infinite;
     animation-delay: 10s;
     opacity: 0;
   }
 
-  &--second{
+  &--second {
     animation: skywalker 15s linear infinite;
   }
 }
-
-
 
 //---WAVES---
 
@@ -780,9 +787,63 @@ $WAVE_HEIGHT: 30%;
   }
 }
 
-//title
+//info
 
 .sky__title {
   @include title(var(--title-gradient), var(--cl-accent));
   font-size: clamp(20px, 3vw, 67px);
+}
+
+//---CUBE---
+
+.cube-wrapper {
+  margin: 100px auto 30px;
+  width: fit-content;
+  perspective: 1000px;
+}
+
+.cube {
+  width: 200px;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateX(-45deg) rotateY(45deg);
+  animation: cubeRotate 5s infinite linear;
+
+  .front {
+    transform: translateZ(100px);
+  }
+
+  .back {
+    transform: rotateY(180deg) translateZ(100px);
+  }
+
+  .right {
+    transform: rotateY(90deg) translateZ(100px);
+  }
+
+  .left {
+    transform: rotateY(-90deg) translateZ(100px);
+  }
+
+  .top {
+    transform: rotateX(90deg) translateZ(100px);
+  }
+
+  .bottom {
+    transform: rotateX(-90deg) translateZ(100px);
+  }
+}
+
+.cube__face {
+  width: 200px;
+  aspect-ratio: 1;
+  position: absolute;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: linear-gradient(to left, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.5));
+  text-shadow: 0 0 1px #0c548d;
+  border: 1px solid rgba(255, 255, 255, 0.5);
 }
